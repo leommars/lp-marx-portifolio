@@ -4,192 +4,267 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfólio | Marx - Soluções Criativas</title>
+
   <!-- Fontes e ícones -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Space+Grotesk:wght@400;600;700&family=Lexend+Deca:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- AOS Animate on Scroll CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Space Grotesk', 'Lexend Deca', sans-serif;
       background-color: #0e0e0e;
       color: #ffffff;
-    }
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background-color: #1a1a1a;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      padding: 20px 60px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-      z-index: 1000;
+      height: 100vh;
+      overflow: hidden; /* Evita a barra de rolagem */
+      text-align: center;
+      position: relative;
+      z-index: 1;
     }
-    .logo {
-      font-size: 40px;
+
+    /* Logotipo fixo no topo esquerdo */
+    .logo-fixed {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 36px;
       font-weight: 700;
       color: #d8b4fe;
       font-family: 'Orbitron', sans-serif;
+      z-index: 1000;
+      cursor: default;
       transition: transform 0.3s, color 0.3s;
     }
-    .logo:hover {
+
+    .logo-fixed:hover {
       transform: scale(1.1) rotate(-2deg);
       color: #c084fc;
     }
-    .hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 100px 60px 60px;
-      background: linear-gradient(120deg, #0e0e0e 50%, #1a1a1a 50%);
-    }
-    .hero-text {
-      max-width: 600px;
-    }
-    .hero-text h1 {
-      font-size: 52px;
-      margin-bottom: 20px;
-      font-family: 'Lexend Deca', sans-serif;
-      font-weight: 700;
-    }
-    .hero-text p {
-      font-size: 20px;
-      color: #e9d5ff;
-      margin-bottom: 30px;
-    }
-    .btn-whatsapp {
-      background-color: #c084fc;
-      color: #0e0e0e;
-      border: none;
-      padding: 15px 25px;
-      border-radius: 30px;
-      font-size: 16px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      transition: transform 0.2s ease;
-    }
-    .btn-whatsapp:hover {
-      transform: scale(1.05);
-    }
-    .hero-img {
-      max-width: 500px;
-      animation: float 4s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-15px);
-      }
-    }
-    .portfolio {
-      padding: 80px 60px;
-      background-color: #111;
-    }
-    .portfolio h2 {
-      font-size: 36px;
-      color: #c084fc;
-      margin-bottom: 40px;
-      text-align: center;
-    }
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-    }
-    .project {
-      background-color: #1f1f1f;
-      border-radius: 16px;
-      overflow: hidden;
-      transition: transform 0.3s;
-    }
-    .project:hover {
-      transform: scale(1.03);
-    }
-    .project img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-    .project-info {
-      padding: 20px;
-    }
-    .project-info h3 {
-      font-size: 20px;
-      margin-bottom: 10px;
-      color: #d8b4fe;
-    }
-    .project-info p {
-      font-size: 14px;
-      color: #ccc;
-    }
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      background-color: #1a1a1a;
-      font-size: 14px;
-      color: #d8b4fe;
-    }
+
+    /* Ícones sociais na lateral esquerda */
     .social-icons {
-      margin-top: 15px;
+      position: fixed;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 999;
     }
+
     .social-icons a {
       color: #d8b4fe;
-      margin: 0 10px;
-      transition: color 0.3s;
+      font-size: 24px;
+      transition: color 0.3s ease, transform 0.2s ease;
     }
+
     .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    .social-icons a[href*="instagram"]:hover {
+      color: #e1306c;
+    }
+
+    .social-icons a[href*="linkedin"]:hover {
+      color: #0077b5;
+    }
+
+    .social-icons a[href*="mailto"]:hover {
+      color: #d44638;
+    }
+
+    .social-icons a[href*="github"]:hover {
+      color: #333;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-text {
+      font-size: 60px;
+      font-family: 'Lexend Deca', sans-serif;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    /* Alinhamento e animação das palavras */
+    .hero-text .words {
+      display: inline-block;
+      font-size: 60px;
+      font-weight: 500;
       color: #c084fc;
+      padding-left: 10px;
+    }
+
+    .hero-text .words span {
+      opacity: 0;
+      animation: changeWords 12s infinite;
+    }
+
+    .hero-text .words span:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .hero-text .words span:nth-child(2) {
+      animation-delay: 4s;
+    }
+
+    .hero-text .words span:nth-child(3) {
+      animation-delay: 8s;
+    }
+
+    @keyframes changeWords {
+      0%, 16.6% {
+        opacity: 1;
+      }
+      33.2%, 50% {
+        opacity: 0;
+      }
+      66.6%, 83.2% {
+        opacity: 1;
+      }
+    }
+
+    /* Animação de pontos conectados */
+    .background-animation {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0e0e0e;
+      z-index: -1;
+    }
+
+    /* Efeito de pontos conectados */
+    .dot {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: #c084fc;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: moveDot 10s infinite;
+    }
+
+    @keyframes moveDot {
+      0% {
+        transform: translate(0, 0);
+      }
+      25% {
+        transform: translate(50vw, 0);
+      }
+      50% {
+        transform: translate(50vw, 50vh);
+      }
+      75% {
+        transform: translate(0, 50vh);
+      }
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+
+    /* Efeito de linhas conectando os pontos */
+    .line {
+      position: absolute;
+      width: 2px;
+      background-color: #c084fc;
+      animation: connectDots 5s infinite;
+    }
+
+    @keyframes connectDots {
+      0%, 100% {
+        transform: scaleX(1);
+      }
+      50% {
+        transform: scaleX(0.5);
+      }
+    }
+
+    /* Responsividade para dispositivos móveis */
+    @media (max-width: 768px) {
+      .hero-text {
+        font-size: 40px;
+      }
+
+      .hero-text .words {
+        font-size: 40px;
+      }
+
+      .social-icons {
+        top: 80%;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">Marx</div>
-  </header>
 
+  <!-- Logotipo fixo -->
+  <div class="logo-fixed">Marx</div>
+
+  <!-- Ícones sociais na lateral esquerda -->
+  <div class="social-icons">
+    <a href="https://www.instagram.com/leommars/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.linkedin.com/in/leonardo-marques-bomtempo/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:contato.leonardombs@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+    <a href="https://github.com/leommars" target="_blank"><i class="fab fa-github"></i></a>
+  </div>
+
+  <!-- Seção principal -->
   <section class="hero">
     <div class="hero-text">
-      <h1>Desenvolvedor Web</h1>
-      <p>Criação de sites modernos, identidades visuais marcantes e suporte completo.</p>
-      <a class="btn-whatsapp" href="https://wa.me/SEUNUMERO" target="_blank">
-        <i class="fab fa-whatsapp"></i> Fale comigo no WhatsApp
-      </a>
-    </div>
-    <img src="https://i.ibb.co/RkyR5psR/Gemini-Generated-Image-xx152pxx152pxx15-1.png" alt="Ilustração" class="hero-img" />
-  </section>
-
-  <section class="portfolio">
-    <h2>Projetos Recentes</h2>
-    <div class="projects">
-      <div class="project">
-        <img src="https://i.ibb.co/BWCtYWw/Chat-GPT-Image-11-04-2025-20-30-38.png" alt="Projeto Monkey E-commerce">
-        <div class="project-info">
-          <h3>Monkey E-commerce</h3>
-          <p>Design moderno de loja virtual com layout responsivo e animações suaves.</p>
-        </div>
-      </div>
+      <h1>Desenvolvedor <div class="words">
+        <span>Web</span>
+        <span>Ágil</span>
+        <span>Criativo</span>
+      </div></h1>
     </div>
   </section>
 
-  <footer>
-    <p>&copy; 2025 Marx. Todos os direitos reservados.</p>
-    <div class="social-icons">
-      <a href="https://instagram.com/seuperfil" target="_blank"><i class="fab fa-instagram fa-lg"></i></a>
-      <a href="https://linkedin.com/in/seuperfil" target="_blank"><i class="fab fa-linkedin fa-lg"></i></a>
-      <a href="https://github.com/seuperfil" target="_blank"><i class="fab fa-github fa-lg"></i></a>
-    </div>
-  </footer>
+  <!-- Animação de pontos conectados -->
+  <div class="background-animation">
+    <!-- Geração de pontos -->
+    <div class="dot" style="top: 20%; left: 10%;"></div>
+    <div class="dot" style="top: 50%; left: 40%;"></div>
+    <div class="dot" style="top: 80%; left: 70%;"></div>
+    <div class="dot" style="top: 10%; left: 80%;"></div>
+    <div class="dot" style="top: 60%; left: 20%;"></div>
+    <!-- Geração de linhas conectando pontos -->
+    <div class="line" style="top: 20%; left: 10%; height: 30%;"></div>
+    <div class="line" style="top: 50%; left: 40%; height: 40%;"></div>
+    <div class="line" style="top: 80%; left: 70%; height: 10%;"></div>
+  </div>
+
+  <!-- Scripts AOS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script>
 </body>
 </html>
